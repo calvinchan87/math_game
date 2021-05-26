@@ -1,0 +1,68 @@
+Create a 2-Player math game 
+where players take turns 
+to answer simple math addition problems.
+
+A new math question is generated for each turn 
+by picking two numbers between 1 and 20.
+
+The player whose turn it is is prompted the question 
+and must answer correctly or lose a life.
+--
+Both players start with 3 lives. 
+They lose a life if they mis-answer a question. 
+At the end of every turn, 
+the game should output the new scores for both players, so players know where they stand.
+
+The game doesn’t end until one of the players loses all their lives. 
+At this point, the game should announce who won 
+and what the other player’s score is.
+
+
+Player(name)
+State: name / id (pass argument: P1, P2, "Amy" etc. (doesn't know about other players))
+State: lives (integer, default 3)
+Method: subtract 1
+
+Question
+State: number_one (integer between 1 and 20, default 1)
+State: number_two (integer between 1 and 20, default 1)
+Alternative: string question and actual sum
+Generating new question and checking input against actual sum isn't "behaviour"
+
+Game (need a class for everything)
+State: current_player
+State: [p1, p2]
+
+Create, Ask, Evaluate -> Y/N, Turn cleanup
+
+def start_game
+- first player becomes current_player (boolean true)
+- call sum
+
+def switch
+- if current_player == true, change to false
+- if current_player == false, change to true
+- call sum
+
+def sum
+- randomize number_one
+- randomize number_two
+- call ask
+
+def ask(guess)
+- What does #{number_one} plus #{number_two} equal?
+- prompt for guess
+- check if current_guess == number_one + number_two
+  - "Correct" if right
+  - "No!" if wrong, lives--
+- call zero?
+
+def zero(current_player)
+- check if lives == 0
+  - show score if false, call switch
+  - call game_over if true
+
+def game_over(current_player)
+- declare winner (where current_player == false)
+- game over / goodbye message
+- terminate
